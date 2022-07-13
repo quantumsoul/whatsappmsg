@@ -2,14 +2,17 @@ const express = require("express")
 const router = express.Router()
 router.post("/send/pdf",async(req,res)=>{
     try {
-        const accountSid = "AC913d0204e11592428f9fbc0ee87664fe"
-        const authToken = "e1de3bc1a936bb353eb1d36de27d8324"
+        const accountSid = process.env.SID
+        const authToken = process.env.token
+        console.log(accountSid)
         const url = req.body.url
+        console.log(url)
         var number = req.body.number
         const client = require('twilio')(accountSid, authToken)
+        console.log(client)
         const Num = "whatsapp:" + "+91" + `${number}`
-        client.messages
-        .create({
+        console.log(Num)
+        client.messages.create({
             mediaUrl: [`${url}`],
             body: 'Hello',
             from: 'whatsapp:+14155238886',
